@@ -1,0 +1,42 @@
+#!/bin/bash
+if [ $# -lt 1 ]; then
+  >&2 echo "Usage: tobase BASE [ALPHABET]
+
+Encodes raw data from stdin.
+Set BASE to '-' to use alphabet length."
+  exit 1
+fi
+BASE=$1
+
+if [ $# -ge 2 ]; then
+  ALPHABET=$2
+  if [ -z "$BASE" ] || [ "$BASE" = "-" ] || [ "$BASE" = "--" ] && \
+     [ -n "$ALPHABET" ]; then
+    BASE=${#ALPHABET}
+  fi
+  if [ $BASE -ne ${#ALPHABET} ]; then
+    >&2 echo "bad alphabet size"
+    exit 1
+  fi
+elif [ $BASE == 64 ]; then
+  base64
+  exit
+elif [ $BASE == 16 ]; then
+  xxd -p | tr -d '\n'
+  exit
+elif [ $BASE -lt 16 ]; then
+  BC_LINE_LENGTH=0 echo "obase=$BASE;ibase=16;`cat - | xxd -p -u | tr -d '\n'`" | bc | tr -d '\\\n'
+  exit
+elif [ $BASE -eq 58 ]; then
+  ALPHABET="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+fi
+
+if [ -z "$ALPHABET" ]; then
+  >&2 echo "no alphabet provided"
+  exit 1
+fi
+BC_LINE_LENGTH=0 echo "obase=$BASE;ibase=16;`cat - | xxd -p -u | tr -d '\n'`" | bc | tr ' ' '\n' | tail -n +2 | while read num; do
+  num="10#$num"
+  echo -en "${ALPHABET:$num:1}"
+done
+
