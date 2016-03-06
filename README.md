@@ -20,7 +20,15 @@ Set BASE to '-' to use alphabet length
 ### Examples
 
 ```sh
-$ echo -n A | tobase 10 # -> 65
+$ echo -n 'A' | tobase 10
+65
+
+$ echo -n 'tobase' | tobase 58
+K9BjCrdnstu
+
+$ echo -n 'A' | tobase '-' '0123456789ABCDEFGHIJ' # base 20
+35
+
 $ SECRET='foo'
 $ ALPHABET='mycoolALPHAbet~!@#$%^&*()_+'
 $ echo $SECRET | openssl dgst -sha256 | tobase '-' $ALPHABET
