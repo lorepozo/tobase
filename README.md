@@ -31,7 +31,7 @@ $ echo -n 'A' | tobase '-' '0123456789ABCDEFGHIJ' # base 20
 
 $ SECRET='foo'
 $ ALPHABET='mycoolALPHAbet~!@#$%^&*()_+'
-$ echo $SECRET | openssl dgst -sha256 | tobase '-' $ALPHABET
+$ echo -n $SECRET | openssl dgst -sha256 -binary | tobase '-' $ALPHABET
 c^ycy@(m!lyP!&o*(t!L&#Hy!tAt_%L#!t~lA+^#!_L$Pe@AH(*A@b
 ```
 
