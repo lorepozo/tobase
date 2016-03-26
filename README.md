@@ -14,7 +14,7 @@ and 64. For other bases, an alphabet must be provided.
 Usage: tobase BASE [ALPHABET]
 
 Encodes raw data from stdin.
-Set BASE to '-' to use alphabet length
+Set BASE to '--' to use alphabet length
 ```
 
 ### Examples
@@ -26,12 +26,12 @@ $ echo -n 'A' | tobase 10
 $ echo -n 'tobase' | tobase 58
 K9BjCrdnstu
 
-$ echo -n 'A' | tobase '-' '0123456789ABCDEFGHIJ' # base 20
+$ echo -n 'A' | tobase -- '0123456789ABCDEFGHIJ' # base 20
 35
 
 $ SECRET='foo'
 $ ALPHABET='mycoolALPHAbet~!@#$%^&*()_+'
-$ echo -n $SECRET | openssl dgst -sha256 -binary | tobase '-' $ALPHABET
+$ echo -n $SECRET | openssl dgst -sha256 -binary | tobase -- $ALPHABET
 c^ycy@(m!lyP!&o*(t!L&#Hy!tAt_%L#!t~lA+^#!_L$Pe@AH(*A@b
 ```
 
