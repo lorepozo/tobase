@@ -7,8 +7,10 @@ __`tobase`__ is a command-line utility to covert to a given base.
 ## Usage
 
 __`tobase`__ encodes raw data from standard input to standard output.
-Out-of-the-box, it can output to any base <= 16, or bases 58 (bitcoin-style)
-and 64. For other bases, an alphabet must be provided.
+Out-of-the-box, it can output to any base <= 16, or bases 58, 64, and 94
+(corresponding to bitcoin encodings, RFC 4648, and printable non-spacelike
+ASCII characters respectively). For other bases, an alphabet must be
+provided. Alphabets can be used for any base.
 
 ```
 Usage: tobase BASE [ALPHABET]
