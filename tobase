@@ -31,6 +31,8 @@ elif [ $BASE -eq 58 ]; then
   ALPHABET="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 elif [ $BASE -eq 94 ]; then
   ALPHABET=`python -c 'import string;print(string.printable.split()[0])'`
+elif [ $BASE -eq 95 ]; then
+  ALPHABET=`python -c 'import string;print(string.printable[:95])'`
 fi
 
 if [ -z "$ALPHABET" ]; then
